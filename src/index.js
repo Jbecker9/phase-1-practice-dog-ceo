@@ -16,13 +16,17 @@ function imageAdd(url){
 // ------------------------------------------------
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json()).then(data => data.message.forEach((element) => {
-        listAdd(element)
-    }
-    ))
-})
+    fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json()).then(data => console.log(data) 
+    // {for(let element of data){
+    //     listAdd(newArray)
+    // }}
+    )
+    })
+
 
 function listAdd(breed){
     const breedList = document.getElementById('dog-breeds')
-    breedList.append(breed)
+    const li = breedList.createElement("li")
+    breedList.append(li)
+    li.innerHTML = breed
 }
