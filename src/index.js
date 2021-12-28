@@ -8,6 +8,21 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function imageAdd(url){
     const dogImage = document.getElementById("dog-image-container")
-    const img = dogImage.createElement('img')
+    const img = document.createElement('img');
     dogImage.append(img)
+    img.src = url
+}
+
+// ------------------------------------------------
+
+document.addEventListener("DOMContentLoaded", () => {
+    fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json()).then(data => data.message.forEach((element) => {
+        listAdd(element)
+    }
+    ))
+})
+
+function listAdd(breed){
+    const breedList = document.getElementById('dog-breeds')
+    breedList.append(breed)
 }
