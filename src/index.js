@@ -3,16 +3,8 @@ console.log('%c HI', 'color: firebrick')
 document.addEventListener("DOMContentLoaded", () => {
     fetchDogs()
     fetchBreeds()
-    // fetch("https://dog.ceo/api/breeds/image/random/4").then(response => response.json()).then(data => data.message.forEach(element => {
-    //     imageAdd(element)
-    // }))
-    // fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json()).then(data => {
-    // breeds = Object.keys(data.message)
-    // breeds.forEach(element => listAdd(element))
-    // }
-    // {for(let element of data){
-    //     listAdd(newArray)
-    // }}
+    const breedDropdown = document.getElementById("breed-dropdown")
+    breedDropdown.addEventListener("change", filter)
 })
 
 function imageAdd(url){
@@ -69,8 +61,12 @@ function fetchBreeds(){
 }
 
 function filter(){
+    const li = document.getElementsByClassName("dog-list")
     const breedDropdown = document.getElementById("breed-dropdown")
-    let li = document.getElementsByClassName("dog-list")
-    console.log(li.innerHTML)
+    breedDropdown.addEventListener("change", () => {
+        switch(breedDropdown[value]){
+            case "a": forEach(value.letter)
+        }
+            
+    })
 }
-filter()
