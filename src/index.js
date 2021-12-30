@@ -29,6 +29,7 @@ function imageAdd(url){
 
 function listAdd(breed){
     const breedList = document.getElementById('dog-breeds')
+    
     const li = document.createElement("li")
     // li.id = "breed-list"
     li.innerText = breed
@@ -54,18 +55,33 @@ function fetchDogs(){
 let allBreeds = []
 function fetchBreeds(){
     fetch('https://dog.ceo/api/breeds/list/all').then(response => response.json()).then(data => {
-    allBreeds = [...Object.keys(data.message)]
-    console.log(allBreeds)
-    allBreeds.forEach(element => {
-        listAdd(element)
-    })
-    })
-    // function filter(){
-        const li = document.getElementsByClassName("dog-list")
-        const selectorBreeds = document.querySelectorAll(".dog-list")
-        const breedDropdown = document.getElementById("breed-dropdown")
-        breedDropdown.addEventListener("change", (e) => {
-            allBreeds.filter(breed => breed[0] === e.target.value).then(allBreeds.splice(0, allBreeds.length - 1, breed))
+        allBreeds = [...Object.keys(data.message)]
+        console.log(allBreeds)
+        allBreeds.forEach(element => {
+            listAdd(element)
         })
-    // }
+    dropDownEventListener()
+    })
+}
+
+function dropDownEventListener(){
+    const breedDropdown = document.getElementById("breed-dropdown")
+    breedDropdown.addEventListener("change", (e) => {
+        const breedList = document.getElementById('dog-breeds')
+        breedList.innerHTML = " "
+        selectBreedStartingLetter(e.target.value)
+    })
+}
+function selectBreedStartingLetter(letter){
+    updateBreedList(allBreeds.filter(breed => breed.startsWith(letter)))
+}
+function updateBreedList(breeds){
+    let ul = document.querySelectorAll("#dog-breeds")
+    removeChildren(ul)
+    breeds.forEach(breed => listAdd(breed))
+}
+function removeChildren(parent){
+    while (parent.children){
+        parent.removeChildren(parent.child)
+    }
 }
